@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order List</title>
+</head>
+<body>
+    <h1>Order List</h1>
+    <a href="{% url 'order_new' %}" style="padding: 10px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;">Add New Order</a>
+    <form method="get">
+        <input type="text" name="employee_name" placeholder="Search by employee name...">
+        <input type="text" name="order_code" placeholder="Search by order code...">
+        <input type="text" name="product_name" placeholder="Search by product name...">
+        <input type="date" name="date_from" placeholder="Date from...">
+        <input type="date" name="date_to" placeholder="Date to...">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for order in orders %}
+        <li>
+            Order number {{ order.id }}: {{ order.product.name }} - Quantity: {{ order.quantity }}
+            <ul>
+                <li>Product code: {{ order.product.code }}</li>
+                <li>Supplier: {{ order.product.supplier.name }}</li>
+                <li>Status: {{ order.status }}</li>
+                <li>Order Date: {{ order.order_date }}</li>
+                <li>Due Date: {{ order.due_date }}</li>
+                <li><img src="{{ order.product.image.url }}" alt="Product Image" style="width:100px;"></li>
+            </ul>
+            <a href="{% url 'order_edit' id=order.id %}" style="padding: 5px; background-color: orange; color: white; text-decoration: none; border-radius: 5px;">Edit</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
