@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add/Edit Order</title>
+</head>
+<body>
+    <h1>{{ form.instance.id|default:"Add New Order" }} - {{ form.instance }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <label for="id_product">Product:</label>
+            {{ form.product }}
+        </p>
+        <p>
+            <label for="id_quantity">Quantity:</label>
+            {{ form.quantity }}
+        </p>
+        <p>
+            <label for="id_due_date">Due Date:</label>
+            {{ form.due_date }}
+        </p>
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'order_list' %}">Return to Order List</a>
+</body>
+</html>
